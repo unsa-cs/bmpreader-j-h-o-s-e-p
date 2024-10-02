@@ -27,8 +27,7 @@ int main( int argc, char** argv) {
   if (!image) return 1;
 
   // Inicializar GLUT
-  int argc = 1; // Necesario para evitar problemas con glutInit
-  char *argv[1] = { "" }; // Argumento vacío para GLUT
+  argc = 1; // Necesario para evitar problemas con glutInit
   glutInit(&argc, argv);
 
   // Establecer el modo de visualización
