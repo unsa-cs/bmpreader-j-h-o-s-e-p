@@ -19,7 +19,21 @@ BMPImage* readBMP(const char *filename) {
   fread(image->data, sizeof(unsigned char), image->width * image->height * 3, file);
   fclose(file);
 
-  return image;
+  for (int i = 0; i < image->width * image->height * 3; i += 3) {
+        unsigned char r = image->data[i + 2]; // Canal Rojo (R)
+        unsigned char g = image->data[i + 1]; // Canal Verde (G)
+        unsigned char b = image->data[i];     // Canal Azul (B)
+
+        // Convertir a escala de grises usando la fórmula de luminancia
+        unsigned char gray = (unsigned char)(0.3 * r + 0.59 * g + 0.11 * b);
+
+        // Asignar el mismo valor a los tres canales para hacer el píxel gris
+        image->data[i] = gray;     // Canal Azul
+        image->data[i + 1] = gray; // Canal Verde
+        image->data[i + 2] = gray; // Canal Rojo
+    }
+
+    return image;
 }
 
 void freeBMP(BMPImage *image) {
